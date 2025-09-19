@@ -31,26 +31,7 @@ class MentorsTable
                     ->searchable()
                     ->copyable()
                     ->copyMessage('Email copied')
-                    ->copyMessageDuration(1500)
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('phone')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('location')
-                    ->label('Location')
-                    ->searchable()
-                    ->sortable()
-                    ->toggleable(),
-                TextColumn::make('profession')
-                    ->label('Profession')
-                    ->searchable()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('expertiseCategories.name')
-                    ->label('Expertise')
-                    ->badge()
-                    ->separator(', ')
-                    ->wrap(),
+                    ->copyMessageDuration(1500),
                 TextColumn::make('status')
                     ->badge()
                     ->color(fn ($state): string => match ($state->value ?? $state) {
@@ -60,27 +41,6 @@ class MentorsTable
                         'rejected' => 'gray',
                         default => 'gray',
                     }),
-                TextColumn::make('mentorship_sessions_count')
-                    ->label('Sessions')
-                    ->counts('mentorshipSessions')
-                    ->badge()
-                    ->color('info'),
-                TextColumn::make('join_online_community')
-                    ->label('Community')
-                    ->badge()
-                    ->color(fn (bool $state): string => $state ? 'success' : 'gray')
-                    ->formatStateUsing(fn (bool $state): string => $state ? 'Yes' : 'No')
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('approved_at')
-                    ->label('Approved')
-                    ->date()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('created_at')
-                    ->label('Applied')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
