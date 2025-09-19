@@ -38,6 +38,23 @@ class ViewMentor extends ViewRecord
                             ->visible(fn ($record) => $record->profession !== null),
                     ])->columns(2),
 
+                Section::make('Expertise & Availability')
+                    ->schema([
+                        TextEntry::make('expertiseCategories.name')
+                            ->label('Areas of Expertise')
+                            ->badge()
+                            ->color('primary'),
+                        TextEntry::make('booking_calendar_link')
+                            ->label('📅 Booking Calendar Link')
+                            ->url(fn ($state) => $state, shouldOpenInNewTab: true)
+                            ->copyable()
+                            ->placeholder('⚠️ No booking link provided yet')
+                            ->badge()
+                            ->color(fn ($state) => $state ? 'success' : 'warning')
+                            ->size('lg')
+                            ->weight(FontWeight::Bold),
+                    ]),
+
                 Section::make('Status & Approval')
                     ->schema([
                         TextEntry::make('status')
@@ -61,18 +78,6 @@ class ViewMentor extends ViewRecord
                             ->dateTime()
                             ->label('Last Updated'),
                     ])->columns(2),
-
-                Section::make('Expertise & Availability')
-                    ->schema([
-                        TextEntry::make('expertiseCategories.name')
-                            ->label('Areas of Expertise')
-                            ->badge()
-                            ->color('primary'),
-                        TextEntry::make('booking_link')
-                            ->label('Booking Calendar')
-                            ->url(fn ($state) => $state, shouldOpenInNewTab: true)
-                            ->visible(fn ($record) => $record->booking_link !== null),
-                    ]),
 
                 Section::make('Community Engagement')
                     ->schema([
@@ -123,6 +128,7 @@ class ViewMentor extends ViewRecord
                     $this->record->approve(auth()->id());
                     Notification::make()
                         ->title('Mentor approved successfully')
+                        ->body('An approval email will be sent to the mentor.')
                         ->success()
                         ->send();
                 });

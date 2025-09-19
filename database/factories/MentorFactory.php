@@ -20,7 +20,7 @@ class MentorFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'email' => fake()->optional(0.95)->unique()->safeEmail(),
             'phone' => fake()->optional(0.8)->phoneNumber(),
             'location' => fake()->randomElement(['Berlin', 'Hamburg', 'München', 'Köln', 'Frankfurt', 'Stuttgart', 'Düsseldorf', 'Dortmund', 'Leipzig']),
             'profession' => fake()->jobTitle(),

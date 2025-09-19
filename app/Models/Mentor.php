@@ -116,6 +116,16 @@ class Mentor extends Model
             'approved_at' => now(),
             'approved_by' => $approverId,
         ]);
+
+        // Send approval email asynchronously
+        if ($this->email) {
+            try {
+                \Illuminate\Support\Facades\Mail::to($this->email)
+                    ->queue(new \App\Mail\MentorApprovedMail($this));
+            } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Log::error('Failed to queue approval email for mentor ' . $this->id . ': ' . $e->getMessage());
+            }
+        }
     }
 
     public function suspend(): void
