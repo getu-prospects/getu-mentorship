@@ -32,14 +32,10 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo('/images/getu-logo.png')
             ->brandLogoHeight('3rem')
             ->colors([
-                'primary' => Color::hex('#07847f'),
-                'success' => Color::hex('#8fe1de'),
-                'warning' => Color::hex('#fe7f4c'),
-                'danger' => Color::hex('#fe7f4c'),
-                'info' => Color::hex('#1e3737'),
-                'gray' => Color::hex('#8b9e9e'),
+                'primary' => Color::Teal,
             ])
             ->favicon('/images/getu-logo.png')
+            ->spa()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
