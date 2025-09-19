@@ -8,6 +8,7 @@ use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Notifications\Notification;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Columns\TextColumn;
@@ -30,10 +31,11 @@ class MentorsTable
                     ->searchable()
                     ->copyable()
                     ->copyMessage('Email copied')
-                    ->copyMessageDuration(1500),
+                    ->copyMessageDuration(1500)
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('phone')
                     ->searchable()
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('location')
                     ->label('Location')
                     ->searchable()
@@ -51,10 +53,12 @@ class MentorsTable
                     ->wrap(),
                 TextColumn::make('status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn ($state): string => match ($state->value ?? $state) {
                         'pending' => 'warning',
                         'approved' => 'success',
                         'suspended' => 'danger',
+                        'rejected' => 'gray',
+                        default => 'gray',
                     }),
                 TextColumn::make('mentorship_sessions_count')
                     ->label('Sessions')
@@ -85,13 +89,18 @@ class MentorsTable
                         'pending' => 'Pending Review',
                         'approved' => 'Approved',
                         'suspended' => 'Suspended',
+                        'rejected' => 'Rejected',
                     ]),
                 SelectFilter::make('expertise')
                     ->relationship('expertiseCategories', 'name')
                     ->multiple()
                     ->preload(),
             ])
+            ->recordUrl(
+                fn (Mentor $record): string => route('filament.admin.resources.mentors.view', ['record' => $record]),
+            )
             ->recordActions([
+                ViewAction::make(),
                 Action::make('approve')
                     ->label('Approve')
                     ->icon('heroicon-o-check-circle')
@@ -113,11 +122,25 @@ class MentorsTable
                     ->requiresConfirmation()
                     ->visible(fn (Mentor $record): bool => $record->status === 'approved')
                     ->action(function (Mentor $record): void {
-                        $record->update(['status' => 'suspended']);
+                        $record->suspend();
 
                         Notification::make()
                             ->title('Mentor suspended')
                             ->warning()
+                            ->send();
+                    }),
+                Action::make('reject')
+                    ->label('Reject')
+                    ->icon('heroicon-o-x-circle')
+                    ->color('danger')
+                    ->requiresConfirmation()
+                    ->visible(fn (Mentor $record): bool => $record->status === 'pending')
+                    ->action(function (Mentor $record): void {
+                        $record->reject();
+
+                        Notification::make()
+                            ->title('Mentor rejected')
+                            ->danger()
                             ->send();
                     }),
                 EditAction::make(),

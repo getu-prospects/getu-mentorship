@@ -22,9 +22,7 @@ class Mentor extends Model
         'phone',
         'location',
         'profession',
-        'expertise_areas',
         'booking_calendar_link',
-        'bio',
         'additional_contribution',
         'join_online_community',
         'status',
@@ -35,7 +33,6 @@ class Mentor extends Model
     protected function casts(): array
     {
         return [
-            'expertise_areas' => AsCollection::class,
             'join_online_community' => 'boolean',
             'status' => MentorStatus::class,
             'approved_at' => 'datetime:Y-m-d H:i:s',

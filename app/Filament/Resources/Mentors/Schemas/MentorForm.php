@@ -6,10 +6,10 @@ use App\Models\ExpertiseCategory;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Placeholder;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class MentorForm
@@ -40,8 +40,7 @@ class MentorForm
                             ->label('Profession')
                             ->maxLength(255)
                             ->placeholder('Software Engineer, Teacher, Doctor...'),
-                    ])
-                    ->columns(2),
+                    ]),
 
                 Section::make('Expertise & Availability')
                     ->schema([
@@ -64,15 +63,8 @@ class MentorForm
                             ->maxLength(500),
                     ]),
 
-                Section::make('About')
+                Section::make('Community Engagement')
                     ->schema([
-                        Textarea::make('bio')
-                            ->label('Biography')
-                            ->required()
-                            ->rows(4)
-                            ->maxLength(2000)
-                            ->helperText('Tell us about your background and experience')
-                            ->columnSpanFull(),
                         Textarea::make('additional_contribution')
                             ->label('Additional Contributions')
                             ->rows(3)
@@ -104,7 +96,6 @@ class MentorForm
                             ->content(fn ($record) => $record?->approvedBy?->name ?? 'N/A')
                             ->visible(fn ($get, $record) => $get('status') === 'approved' && $record),
                     ])
-                    ->columns(2)
                     ->visible(fn ($context) => $context === 'edit'),
             ]);
     }
