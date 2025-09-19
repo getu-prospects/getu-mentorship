@@ -107,6 +107,11 @@ class MentorshipRequest extends Model
         return $this->status === MentorshipRequestStatus::Cancelled;
     }
 
+    public function isActive(): bool
+    {
+        return in_array($this->status, [MentorshipRequestStatus::Pending, MentorshipRequestStatus::Matched]);
+    }
+
     public function match(Mentor $mentor, ?int $matchedByUserId = null): void
     {
         $this->update([
