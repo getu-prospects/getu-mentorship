@@ -34,6 +34,16 @@ class MentorsTable
                 TextColumn::make('phone')
                     ->searchable()
                     ->toggleable(),
+                TextColumn::make('location')
+                    ->label('Location')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(),
+                TextColumn::make('profession')
+                    ->label('Profession')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('expertiseCategories.name')
                     ->label('Expertise')
                     ->badge()
@@ -51,6 +61,12 @@ class MentorsTable
                     ->counts('mentorshipSessions')
                     ->badge()
                     ->color('info'),
+                TextColumn::make('join_online_community')
+                    ->label('Community')
+                    ->badge()
+                    ->color(fn (bool $state): string => $state ? 'success' : 'gray')
+                    ->formatStateUsing(fn (bool $state): string => $state ? 'Yes' : 'No')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('approved_at')
                     ->label('Approved')
                     ->date()

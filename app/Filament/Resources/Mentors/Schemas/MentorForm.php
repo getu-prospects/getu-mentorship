@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Mentors\Schemas;
 
 use App\Models\ExpertiseCategory;
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Section;
@@ -31,6 +32,14 @@ class MentorForm
                         TextInput::make('phone')
                             ->tel()
                             ->maxLength(255),
+                        TextInput::make('location')
+                            ->label('Location')
+                            ->maxLength(255)
+                            ->placeholder('Berlin, Hamburg, München...'),
+                        TextInput::make('profession')
+                            ->label('Profession')
+                            ->maxLength(255)
+                            ->placeholder('Software Engineer, Teacher, Doctor...'),
                     ])
                     ->columns(2),
 
@@ -64,6 +73,15 @@ class MentorForm
                             ->maxLength(2000)
                             ->helperText('Tell us about your background and experience')
                             ->columnSpanFull(),
+                        Textarea::make('additional_contribution')
+                            ->label('Additional Contributions')
+                            ->rows(3)
+                            ->maxLength(1000)
+                            ->helperText('Any special skills or ways they can support the community')
+                            ->columnSpanFull(),
+                        Checkbox::make('join_online_community')
+                            ->label('Join Online Community')
+                            ->helperText('Wants to join the online community'),
                     ]),
 
                 Section::make('Status')

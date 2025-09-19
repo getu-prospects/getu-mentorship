@@ -20,9 +20,13 @@ class Mentor extends Model
         'name',
         'email',
         'phone',
+        'location',
+        'profession',
         'expertise_areas',
         'booking_calendar_link',
         'bio',
+        'additional_contribution',
+        'join_online_community',
         'status',
         'approved_at',
         'approved_by',
@@ -32,6 +36,7 @@ class Mentor extends Model
     {
         return [
             'expertise_areas' => AsCollection::class,
+            'join_online_community' => 'boolean',
             'status' => MentorStatus::class,
             'approved_at' => 'datetime:Y-m-d H:i:s',
         ];
