@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Casts\AsCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class MentorshipRequest extends Model
@@ -49,6 +50,11 @@ class MentorshipRequest extends Model
     public function mentorshipSession(): HasOne
     {
         return $this->hasOne(MentorshipSession::class, 'request_id');
+    }
+
+    public function expertiseCategories(): BelongsToMany
+    {
+        return $this->belongsToMany(ExpertiseCategory::class, 'mentorship_request_expertise', 'mentorship_request_id', 'expertise_category_id');
     }
 
     #[Scope]
