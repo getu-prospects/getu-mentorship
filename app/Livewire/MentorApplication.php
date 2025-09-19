@@ -23,7 +23,6 @@ class MentorApplication extends Component
 
     public string $booking_calendar_link = '';
 
-    public string $bio = '';
 
     public string $additional_contribution = '';
 
@@ -33,30 +32,32 @@ class MentorApplication extends Component
 
     public ?string $statusCheckUrl = null;
 
-    protected $rules = [
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:mentors,email|max:255',
-        'phone' => 'nullable|string|max:255',
-        'location' => 'required|string|max:255',
-        'profession' => 'nullable|string|max:255',
-        'expertise_areas' => 'required|array|min:1',
-        'expertise_areas.*' => 'exists:expertise_categories,id',
-        'booking_calendar_link' => 'required|url|max:500',
-        'bio' => 'required|string|max:2000',
-        'additional_contribution' => 'nullable|string|max:1000',
-        'join_online_community' => 'boolean',
-    ];
+    protected function rules()
+    {
+        return [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:mentors,email|max:255',
+            'phone' => $this->join_online_community ? 'required|string|max:255' : 'nullable|string|max:255',
+            'location' => 'required|string|max:255',
+            'profession' => 'nullable|string|max:255',
+            'expertise_areas' => 'required|array|min:1',
+            'expertise_areas.*' => 'exists:expertise_categories,id',
+            'booking_calendar_link' => 'required|url|max:500',
+            'additional_contribution' => 'nullable|string|max:1000',
+            'join_online_community' => 'boolean',
+        ];
+    }
 
     protected $messages = [
         'name.required' => 'Please enter your full name.',
         'email.required' => 'Please enter your email address.',
         'email.unique' => 'This email is already registered.',
+        'phone.required' => 'Please provide your WhatsApp number to join the community.',
         'location.required' => 'Please enter your location.',
         'expertise_areas.required' => 'Please select at least one area of expertise.',
         'expertise_areas.min' => 'Please select at least one area of expertise.',
         'booking_calendar_link.required' => 'Please provide your calendar booking link.',
         'booking_calendar_link.url' => 'Please provide a valid URL for your booking calendar.',
-        'bio.required' => 'Please tell us about yourself.',
     ];
 
     public function submit()
@@ -66,11 +67,11 @@ class MentorApplication extends Component
         $mentor = Mentor::create([
             'name' => $this->name,
             'email' => $this->email,
-            'phone' => $this->phone,
+            'phone' => $this->join_online_community ? $this->phone : null,
             'location' => $this->location,
             'profession' => $this->profession,
             'booking_calendar_link' => $this->booking_calendar_link,
-            'bio' => $this->bio,
+            'bio' => null,
             'additional_contribution' => $this->additional_contribution,
             'join_online_community' => $this->join_online_community,
             'status' => 'pending',
@@ -81,7 +82,7 @@ class MentorApplication extends Component
         $this->statusCheckUrl = URL::signedRoute('mentor.status', ['mentor' => $mentor->id]);
         $this->submitted = true;
 
-        $this->reset(['name', 'email', 'phone', 'location', 'profession', 'expertise_areas', 'booking_calendar_link', 'bio', 'additional_contribution', 'join_online_community']);
+        $this->reset(['name', 'email', 'phone', 'location', 'profession', 'expertise_areas', 'booking_calendar_link', 'additional_contribution', 'join_online_community']);
     }
 
     public function render()

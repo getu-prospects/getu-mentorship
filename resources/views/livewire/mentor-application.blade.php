@@ -4,7 +4,9 @@
         <div class="absolute inset-0 bg-gradient-to-br from-black/10 to-transparent"></div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div class="text-center">
-                <img src="/images/getu-logo.png" alt="GeTu Logo" class="h-20 w-auto mx-auto mb-8 drop-shadow-lg">
+                <div class="w-24 h-24 bg-white rounded-full mx-auto mb-8 grid place-items-center shadow-xl">
+                    <img src="/images/getu-logo.png" alt="GeTu Logo" class="h-14 w-14 object-contain">
+                </div>
                 <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">
                     Thank You for Choosing to Make a Difference!
                 </h1>
@@ -347,29 +349,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Phone Field -->
-                            <div>
-                                <label for="phone" class="block text-sm font-medium text-[#385656] mb-2">
-                                    Phone Number
-                                </label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                        <svg class="w-5 h-5 text-[#8b9e9e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                                        </svg>
-                                    </div>
-                                    <input
-                                        type="tel"
-                                        wire:model="phone"
-                                        id="phone"
-                                        class="w-full pl-12 pr-4 py-3 border border-[#edefef] bg-white text-[#1e3737] placeholder-[#8b9e9e] focus:outline-none focus:border-[#07847f] transition-colors @error('phone') border-[#fe7f4c] @enderror"
-                                        placeholder="+49 123 456789"
-                                    >
-                                </div>
-                                @error('phone')
-                                    <p class="mt-2 text-sm text-[#fe7f4c]">{{ $message }}</p>
-                                @enderror
-                            </div>
 
                             <!-- Location Field -->
                             <div>
@@ -439,7 +418,7 @@
                                         placeholder="https://calendly.com/your-name"
                                     >
                                 </div>
-                                <p class="mt-2 text-xs text-[#8b9e9e]">Calendly, Cal.com, or any booking system</p>
+                                <p class="mt-2 text-xs text-[#8b9e9e]">Calendly, Google Calendar, Cal.com, or any booking system</p>
                                 @error('booking_calendar_link')
                                     <p class="mt-2 text-sm text-[#fe7f4c]">{{ $message }}</p>
                                 @enderror
@@ -489,58 +468,11 @@
                     </div>
                 </div>
 
-                {{-- Biography Section --}}
-                <div class="bg-white">
-                    <div class="bg-gradient-to-r from-[#8fe1de] to-[#a5e8e5] px-8 py-6 flex items-center">
-                        <div class="w-12 h-12 bg-white/20 backdrop-blur flex items-center justify-center text-[#1e3737] text-xl font-bold mr-4">3</div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-[#1e3737]">Your Story</h3>
-                            <p class="text-[#385656] text-sm mt-1">Share your journey and motivation</p>
-                        </div>
-                    </div>
-
-                    <div class="p-8">
-                        <div>
-                            <label for="bio" class="block text-sm font-medium text-[#385656] mb-2">
-                                Tell Us Your Story <span class="text-[#fe7f4c]">*</span>
-                            </label>
-                            <div class="relative">
-                                <textarea
-                                    wire:model="bio"
-                                    id="bio"
-                                    rows="8"
-                                    maxlength="2000"
-                                    class="w-full px-4 py-3 border border-[#edefef] bg-white text-[#1e3737] placeholder-[#8b9e9e] focus:outline-none focus:border-[#07847f] transition-colors resize-none @error('bio') border-[#fe7f4c] @enderror"
-                                    placeholder="Share your background, experience in Germany, and why you're passionate about helping newcomers integrate successfully..."
-                                ></textarea>
-
-                                <!-- Character Counter with Progress Bar -->
-                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white to-transparent pt-8 pb-3 px-4">
-                                    <div class="flex items-center justify-between bg-white">
-                                        <div class="w-full h-1 bg-gray-200 mr-4">
-                                            <div class="h-1 bg-gradient-to-r from-[#07847f] to-[#8fe1de] transition-all duration-300"
-                                                 style="width: {{ min((strlen($bio) / 2000) * 100, 100) }}%"></div>
-                                        </div>
-                                        <span class="text-xs font-medium text-[#6e7a7a] whitespace-nowrap">
-                                            {{ strlen($bio) }}/2000
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="mt-3 text-xs text-[#8b9e9e]">
-                                Describe your journey and how you can help others
-                            </p>
-                            @error('bio')
-                                <p class="mt-2 text-sm text-[#fe7f4c]">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
 
                 {{-- Additional Contribution Section --}}
                 <div class="bg-white">
                     <div class="bg-gradient-to-r from-[#385656] to-[#4a6b6b] px-8 py-6 flex items-center">
-                        <div class="w-12 h-12 bg-white/20 backdrop-blur flex items-center justify-center text-white text-xl font-bold mr-4">4</div>
+                        <div class="w-12 h-12 bg-white/20 backdrop-blur flex items-center justify-center text-white text-xl font-bold mr-4">3</div>
                         <div>
                             <h3 class="text-2xl font-bold text-white">Additional Ways to Help</h3>
                             <p class="text-white/90 text-sm mt-1">How else can you contribute to our community?</p>
@@ -570,18 +502,18 @@
 
                         <div>
                             <label class="block text-sm font-medium text-[#385656] mb-3">
-                                Join Our Online Community
+                                Join Our WhatsApp Community
                             </label>
                             <div class="bg-[#f2f7f7] border-l-4 border-[#07847f] p-4">
                                 <label class="flex items-start cursor-pointer">
                                     <input
                                         type="checkbox"
-                                        wire:model="join_online_community"
+                                        wire:model.live="join_online_community"
                                         class="mt-1 h-5 w-5 text-[#07847f] border-[#edefef] focus:ring-[#8fe1de] focus:ring-offset-0"
                                     >
                                     <div class="ml-3">
                                         <span class="block font-medium text-[#1e3737]">
-                                            Yes, I want to join the online community
+                                            Yes, I want to join the WhatsApp community
                                         </span>
                                         <span class="block text-sm text-[#8b9e9e] mt-1">
                                             Connect with other mentors and mentees, share resources, and participate in discussions
@@ -589,6 +521,32 @@
                                     </div>
                                 </label>
                             </div>
+
+                            @if($join_online_community)
+                                <div class="mt-6">
+                                    <label for="phone" class="block text-sm font-medium text-[#385656] mb-2">
+                                        WhatsApp Number <span class="text-[#fe7f4c]">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                            <svg class="w-5 h-5 text-[#8b9e9e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                            </svg>
+                                        </div>
+                                        <input
+                                            type="tel"
+                                            wire:model="phone"
+                                            id="phone"
+                                            class="w-full pl-12 pr-4 py-3 border border-[#edefef] bg-white text-[#1e3737] placeholder-[#8b9e9e] focus:outline-none focus:border-[#07847f] transition-colors @error('phone') border-[#fe7f4c] @enderror"
+                                            placeholder="+49 123 456789"
+                                        >
+                                    </div>
+                                    <p class="mt-2 text-xs text-[#8b9e9e]">We'll add you to our WhatsApp community group</p>
+                                    @error('phone')
+                                        <p class="mt-2 text-sm text-[#fe7f4c]">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
