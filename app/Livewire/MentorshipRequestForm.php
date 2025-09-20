@@ -23,7 +23,7 @@ class MentorshipRequestForm extends Component
     #[Validate('required|string|min:50|max:2000')]
     public string $help_description = '';
 
-    #[Validate('nullable|array|max:3')]
+    #[Validate('nullable|array')]
     public array $preferred_expertise = [];
 
     public bool $submitted = false;
@@ -74,7 +74,7 @@ class MentorshipRequestForm extends Component
 
     public function render()
     {
-        return view('livewire.mentorship-request-form')
+        return $this->view('livewire.mentorship-request-form')
             ->layout('layouts.app', ['title' => 'Request Mentorship - GeTu Prospects']);
     }
 }

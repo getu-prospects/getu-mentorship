@@ -87,7 +87,7 @@ class MentorApplication extends Component
 
     public function render()
     {
-        return view('livewire.mentor-application', [
+        return $this->view('livewire.mentor-application', [
             'expertiseCategories' => ExpertiseCategory::where('is_active', true)
                 ->orderBy('sort_order')
                 ->get(),
