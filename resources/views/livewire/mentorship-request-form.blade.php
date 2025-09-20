@@ -16,7 +16,12 @@
                         </svg>
                     </div>
                     <h2 class="text-3xl font-bold text-[#1e3737] mb-4">Request Submitted Successfully</h2>
-                    <p class="text-[#6e7a7a] mb-8 text-lg">Thank you for your mentorship request. We'll match you with a suitable mentor and contact you within 3-5 business days.</p>
+                    <p class="text-[#6e7a7a] mb-4 text-lg">Thank you for your mentorship request. We'll match you with a suitable mentor and contact you within 3-5 business days.</p>
+                    <div class="bg-[#f2f7f7] border-l-4 border-[#07847f] p-4 mb-8 text-left">
+                        <p class="text-sm text-[#385656]">
+                            <strong>Important:</strong> Please check your email inbox (including spam/junk folder) for updates about your mentor assignment.
+                        </p>
+                    </div>
                     <button wire:click="resetForm" class="px-8 py-3 bg-[#1e3737] text-white font-medium hover:bg-[#385656] transition-colors">
                         Submit Another Request
                     </button>

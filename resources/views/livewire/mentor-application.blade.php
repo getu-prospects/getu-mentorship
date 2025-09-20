@@ -29,7 +29,12 @@
                         </svg>
                     </div>
                     <h2 class="text-3xl font-bold text-[#1e3737] mb-4">Application Submitted</h2>
-                    <p class="text-[#6e7a7a] mb-8 text-lg">Thank you for joining the GeTu mentor community. We'll review your application within 2-3 business days.</p>
+                    <p class="text-[#6e7a7a] mb-4 text-lg">Thank you for joining the GeTu mentor community. We'll review your application within 2-3 business days.</p>
+                    <div class="bg-[#f2f7f7] border-l-4 border-[#07847f] p-4 mb-8 text-left">
+                        <p class="text-sm text-[#385656]">
+                            <strong>Important:</strong> Please check your email inbox (including spam/junk folder) for updates about your application status.
+                        </p>
+                    </div>
 
                     @if($statusCheckUrl)
                         <div class="bg-[#f2f7f7] border-l-4 border-[#07847f] p-6 text-left max-w-2xl mx-auto mb-8">
