@@ -120,6 +120,32 @@ class MentorshipRequest extends Model
             'matched_at' => now(),
             'matched_by' => $matchedByUserId,
         ]);
+
+        // Send match notification emails asynchronously
+        $this->sendMatchNotifications($mentor);
+    }
+
+    private function sendMatchNotifications(Mentor $mentor): void
+    {
+        // Send email to mentee
+        if (! empty(trim($this->mentee_email))) {
+            try {
+                \Illuminate\Support\Facades\Mail::to($this->mentee_email)
+                    ->queue(new \App\Mail\MenteeMatchNotificationMail($this, $mentor));
+            } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Log::error('Failed to queue mentee match notification email for request '.$this->id.': '.$e->getMessage());
+            }
+        }
+
+        // Send email to mentor
+        if (! empty(trim($mentor->email))) {
+            try {
+                \Illuminate\Support\Facades\Mail::to($mentor->email)
+                    ->queue(new \App\Mail\MentorMatchNotificationMail($this, $mentor));
+            } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Log::error('Failed to queue mentor match notification email for mentor '.$mentor->id.': '.$e->getMessage());
+            }
+        }
     }
 
     public function complete(): void

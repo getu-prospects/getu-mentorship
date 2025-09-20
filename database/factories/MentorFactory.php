@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Enums\MentorStatus;
-use App\Models\ExpertiseCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,11 +19,11 @@ class MentorFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'email' => fake()->optional(0.95)->unique()->safeEmail(),
+            'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->optional(0.8)->phoneNumber(),
             'location' => fake()->randomElement(['Berlin', 'Hamburg', 'München', 'Köln', 'Frankfurt', 'Stuttgart', 'Düsseldorf', 'Dortmund', 'Leipzig']),
             'profession' => fake()->jobTitle(),
-            'booking_calendar_link' => 'https://calendly.com/' . fake()->slug(),
+            'booking_calendar_link' => fake()->optional(0.8)->passthrough('https://calendly.com/'.fake()->slug()),
             'additional_contribution' => fake()->optional(0.7)->sentence(15),
             'join_online_community' => fake()->boolean(70),
             'status' => fake()->randomElement(MentorStatus::cases()),
