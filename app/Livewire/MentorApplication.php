@@ -5,8 +5,10 @@ namespace App\Livewire;
 use App\Models\ExpertiseCategory;
 use App\Models\Mentor;
 use Illuminate\Support\Facades\URL;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
+#[Layout('layouts.app', ['title' => 'Become a Mentor - GeTu Mentorship'])]
 class MentorApplication extends Component
 {
     public string $name = '';
@@ -87,10 +89,10 @@ class MentorApplication extends Component
 
     public function render()
     {
-        return $this->view('livewire.mentor-application', [
+        return view('livewire.mentor-application', [
             'expertiseCategories' => ExpertiseCategory::where('is_active', true)
                 ->orderBy('sort_order')
                 ->get(),
-        ])->layout('layouts.app', ['title' => 'Become a Mentor - GeTu Mentorship']);
+        ]);
     }
 }

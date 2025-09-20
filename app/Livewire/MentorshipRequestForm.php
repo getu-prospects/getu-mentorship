@@ -6,9 +6,11 @@ use App\Enums\MentorshipRequestStatus;
 use App\Models\ExpertiseCategory;
 use App\Models\MentorshipRequest;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
+#[Layout('layouts.app', ['title' => 'Request Mentorship - GeTu Prospects'])]
 class MentorshipRequestForm extends Component
 {
     #[Validate('required|string|min:2|max:255')]
@@ -74,7 +76,6 @@ class MentorshipRequestForm extends Component
 
     public function render()
     {
-        return $this->view('livewire.mentorship-request-form')
-            ->layout('layouts.app', ['title' => 'Request Mentorship - GeTu Prospects']);
+        return view('livewire.mentorship-request-form');
     }
 }
