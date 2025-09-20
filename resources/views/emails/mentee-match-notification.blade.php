@@ -277,6 +277,21 @@
                 </ul>
             </div>
 
+            @if($feedbackUrl)
+                <div class="section">
+                    <div class="section-title">After Your Session</div>
+                    <p>After you've completed your mentorship session, we'd love to hear about your experience. Please use the link below to provide feedback:</p>
+
+                    <div style="text-align: center; margin: 20px 0;">
+                        <a href="{{ $feedbackUrl }}" style="display: inline-block; background-color: #fe7f4c; color: #ffffff; padding: 12px 24px; text-decoration: none; font-weight: 600; border-radius: 6px;">
+                            Provide Session Feedback
+                        </a>
+                    </div>
+
+                    <p style="font-size: 14px; color: #8b9e9e;"><strong>Important:</strong> This feedback link will expire in 7 days and can only be used once. Please save this email until after your session.</p>
+                </div>
+            @endif
+
             <div class="divider"></div>
 
             <div class="note-box">

@@ -45,6 +45,11 @@ class MentorshipSession extends Model
         return $this->hasMany(Feedback::class, 'session_id');
     }
 
+    public function feedbackTokens(): HasMany
+    {
+        return $this->hasMany(FeedbackToken::class, 'session_id');
+    }
+
     public function mentorFeedback(): HasMany
     {
         return $this->feedback()->where('feedback_type', 'mentor');

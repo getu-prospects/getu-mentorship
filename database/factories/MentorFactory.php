@@ -23,7 +23,7 @@ class MentorFactory extends Factory
             'phone' => fake()->optional(0.8)->phoneNumber(),
             'location' => fake()->randomElement(['Berlin', 'Hamburg', 'München', 'Köln', 'Frankfurt', 'Stuttgart', 'Düsseldorf', 'Dortmund', 'Leipzig']),
             'profession' => fake()->jobTitle(),
-            'booking_calendar_link' => fake()->optional(0.8)->passthrough('https://calendly.com/'.fake()->slug()),
+            'booking_calendar_link' => 'https://calendly.com/'.fake()->slug(),
             'additional_contribution' => fake()->optional(0.7)->sentence(15),
             'join_online_community' => fake()->boolean(70),
             'status' => fake()->randomElement(MentorStatus::cases()),
@@ -33,7 +33,7 @@ class MentorFactory extends Factory
                     : null;
             },
             'approved_by' => function (array $attributes) {
-                return $attributes['approved_at'] ? 1 : null;
+                return $attributes['approved_at'] ? \App\Models\User::factory() : null;
             },
         ];
     }
@@ -46,7 +46,7 @@ class MentorFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'status' => MentorStatus::Approved,
             'approved_at' => fake()->dateTimeBetween('-3 months', 'now'),
-            'approved_by' => 1,
+            'approved_by' => \App\Models\User::factory(),
         ]);
     }
 
@@ -70,7 +70,7 @@ class MentorFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'status' => MentorStatus::Suspended,
             'approved_at' => fake()->dateTimeBetween('-3 months', 'now'),
-            'approved_by' => 1,
+            'approved_by' => \App\Models\User::factory(),
         ]);
     }
 

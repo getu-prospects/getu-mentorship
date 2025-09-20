@@ -288,6 +288,21 @@
                 </ul>
             </div>
 
+            @if($reportUrl)
+                <div class="section">
+                    <div class="section-title">After Your Session</div>
+                    <p>After you've completed your mentorship session, please provide us with a brief report using the link below. This helps us track the impact and success of our program:</p>
+
+                    <div style="text-align: center; margin: 20px 0;">
+                        <a href="{{ $reportUrl }}" style="display: inline-block; background-color: #07847f; color: #ffffff; padding: 12px 24px; text-decoration: none; font-weight: 600; border-radius: 6px;">
+                            Submit Session Report
+                        </a>
+                    </div>
+
+                    <p style="font-size: 14px; color: #8b9e9e;"><strong>Important:</strong> This report link will expire in 7 days and can only be used once. Please save this email until after your session.</p>
+                </div>
+            @endif
+
             <div class="divider"></div>
 
             <div class="note-box">

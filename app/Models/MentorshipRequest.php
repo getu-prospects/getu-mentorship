@@ -122,17 +122,33 @@ class MentorshipRequest extends Model
             'matched_by' => $matchedByUserId,
         ]);
 
+        // Create mentorship session
+        $session = $this->createMentorshipSession($mentor);
+
         // Send match notification emails asynchronously
-        $this->sendMatchNotifications($mentor);
+        $this->sendMatchNotifications($mentor, $session);
     }
 
-    private function sendMatchNotifications(Mentor $mentor): void
+    private function createMentorshipSession(Mentor $mentor): MentorshipSession
     {
+        return MentorshipSession::create([
+            'request_id' => $this->id,
+            'mentor_id' => $mentor->id,
+            'session_status' => \App\Enums\MentorshipSessionStatus::Scheduled,
+        ]);
+    }
+
+    private function sendMatchNotifications(Mentor $mentor, MentorshipSession $session): void
+    {
+        // Create feedback tokens
+        $menteeToken = FeedbackToken::createForSession($session, 'mentee_feedback');
+        $mentorToken = FeedbackToken::createForSession($session, 'mentor_report');
+
         // Send email to mentee
         if (! empty(trim($this->mentee_email))) {
             try {
                 \Illuminate\Support\Facades\Mail::to($this->mentee_email)
-                    ->queue(new \App\Mail\MenteeMatchNotificationMail($this, $mentor));
+                    ->queue(new \App\Mail\MenteeMatchNotificationMail($this, $mentor, $menteeToken));
             } catch (\Exception $e) {
                 \Illuminate\Support\Facades\Log::error('Failed to queue mentee match notification email for request '.$this->id.': '.$e->getMessage());
             }
@@ -142,7 +158,7 @@ class MentorshipRequest extends Model
         if (! empty(trim($mentor->email))) {
             try {
                 \Illuminate\Support\Facades\Mail::to($mentor->email)
-                    ->queue(new \App\Mail\MentorMatchNotificationMail($this, $mentor));
+                    ->queue(new \App\Mail\MentorMatchNotificationMail($this, $mentor, $mentorToken));
             } catch (\Exception $e) {
                 \Illuminate\Support\Facades\Log::error('Failed to queue mentor match notification email for mentor '.$mentor->id.': '.$e->getMessage());
             }

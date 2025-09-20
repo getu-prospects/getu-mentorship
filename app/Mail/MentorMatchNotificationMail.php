@@ -20,7 +20,8 @@ class MentorMatchNotificationMail extends Mailable implements ShouldQueue
      */
     public function __construct(
         public MentorshipRequest $mentorshipRequest,
-        public Mentor $mentor
+        public Mentor $mentor,
+        public ?\App\Models\FeedbackToken $feedbackToken = null
     ) {}
 
     /**
@@ -38,6 +39,15 @@ class MentorMatchNotificationMail extends Mailable implements ShouldQueue
      */
     public function content(): Content
     {
+        $reportUrl = null;
+        if ($this->feedbackToken) {
+            $reportUrl = \Illuminate\Support\Facades\URL::signedRoute(
+                'report.form',
+                ['token' => $this->feedbackToken->token],
+                $this->feedbackToken->expires_at
+            );
+        }
+
         return new Content(
             view: 'emails.mentor-match-notification',
             with: [
@@ -46,6 +56,7 @@ class MentorMatchNotificationMail extends Mailable implements ShouldQueue
                 'hasBookingLink' => ! empty(trim($this->mentor->booking_calendar_link)),
                 'requestedExpertise' => $this->mentorshipRequest->expertiseCategories->pluck('name')->toArray(),
                 'hasAssignmentNotes' => ! empty(trim($this->mentorshipRequest->assignment_notes)),
+                'reportUrl' => $reportUrl,
             ],
         );
     }
