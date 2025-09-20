@@ -193,10 +193,6 @@
 <body>
     <div class="container">
         <div class="header">
-            <svg class="logo" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
-                <rect width="200" height="80" fill="#ffffff"/>
-                <text x="100" y="50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#1e3737">GeTu</text>
-            </svg>
             <h1>Great News! You've Been Matched!</h1>
         </div>
 

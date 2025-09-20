@@ -7,7 +7,6 @@ use App\Models\MentorshipRequest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -30,7 +29,6 @@ class MentorMatchNotificationMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('noreply@getu-prospects.de', 'GeTu Prospects e.V.'),
             subject: 'You\'ve Been Matched with a Mentee!',
         );
     }
@@ -47,6 +45,7 @@ class MentorMatchNotificationMail extends Mailable implements ShouldQueue
                 'mentor' => $this->mentor,
                 'hasBookingLink' => ! empty(trim($this->mentor->booking_calendar_link)),
                 'requestedExpertise' => $this->mentorshipRequest->expertiseCategories->pluck('name')->toArray(),
+                'hasAssignmentNotes' => ! empty(trim($this->mentorshipRequest->assignment_notes)),
             ],
         );
     }

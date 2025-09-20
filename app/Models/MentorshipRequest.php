@@ -26,6 +26,7 @@ class MentorshipRequest extends Model
         'matched_mentor_id',
         'matched_at',
         'matched_by',
+        'assignment_notes',
     ];
 
     protected function casts(): array

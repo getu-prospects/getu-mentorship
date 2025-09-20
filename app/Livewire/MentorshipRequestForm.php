@@ -30,6 +30,14 @@ class MentorshipRequestForm extends Component
 
     public Collection $expertiseCategories;
 
+    public function getIsFormValidProperty(): bool
+    {
+        return ! empty(trim($this->mentee_name)) &&
+               ! empty(trim($this->mentee_email)) &&
+               filter_var($this->mentee_email, FILTER_VALIDATE_EMAIL) &&
+               strlen(trim($this->help_description)) >= 50;
+    }
+
     public function mount(): void
     {
         $this->expertiseCategories = ExpertiseCategory::query()
@@ -42,14 +50,18 @@ class MentorshipRequestForm extends Component
     {
         $this->validate();
 
-        MentorshipRequest::create([
+        $request = MentorshipRequest::create([
             'mentee_name' => $this->mentee_name,
             'mentee_email' => $this->mentee_email,
             'mentee_phone' => $this->mentee_phone ?: null,
             'help_description' => $this->help_description,
-            'preferred_expertise' => collect($this->preferred_expertise)->map(fn($id) => (int) $id),
             'status' => MentorshipRequestStatus::Pending,
         ]);
+
+        if (! empty($this->preferred_expertise)) {
+            $expertiseIds = collect($this->preferred_expertise)->map(fn ($id) => (int) $id)->filter();
+            $request->expertiseCategories()->attach($expertiseIds);
+        }
 
         $this->submitted = true;
     }

@@ -271,7 +271,7 @@
                         <div class="relative">
                             <textarea
                                 id="help_description"
-                                wire:model.live="help_description"
+                                wire:model.live.debounce.500ms="help_description"
                                 rows="6"
                                 class="w-full px-4 py-3 border border-[#edefef] focus:outline-none focus:ring-2 focus:ring-[#07847f] focus:border-transparent @error('help_description') border-[#fe7f4c] @enderror"
                                 placeholder="I am currently facing... and I would like help with..."
@@ -306,6 +306,7 @@
                             type="submit"
                             class="px-8 py-3 bg-[#fe7f4c] text-white font-medium hover:bg-[#e6703f] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             wire:loading.attr="disabled"
+                            @if(!$this->isFormValid) disabled @endif
                         >
                             <span wire:loading.remove>Submit Request</span>
                             <span wire:loading>

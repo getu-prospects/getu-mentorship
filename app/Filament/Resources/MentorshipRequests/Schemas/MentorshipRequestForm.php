@@ -5,8 +5,8 @@ namespace App\Filament\Resources\MentorshipRequests\Schemas;
 use App\Enums\MentorshipRequestStatus;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class MentorshipRequestForm
@@ -36,6 +36,11 @@ class MentorshipRequestForm
                 DateTimePicker::make('matched_at'),
                 TextInput::make('matched_by')
                     ->numeric(),
+                Textarea::make('assignment_notes')
+                    ->label('Assignment Notes')
+                    ->placeholder('Add any notes or special instructions for this mentor assignment...')
+                    ->columnSpanFull()
+                    ->helperText('These notes will be included in the email sent to the mentor when they are matched.'),
             ]);
     }
 }

@@ -188,10 +188,6 @@
 <body>
     <div class="container">
         <div class="header">
-            <svg class="logo" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
-                <rect width="200" height="80" fill="#ffffff"/>
-                <text x="100" y="50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#1e3737">GeTu</text>
-            </svg>
             <h1>You've Been Matched with a Mentee!</h1>
         </div>
 
@@ -233,6 +229,15 @@
                     </div>
                 @endif
             </div>
+
+            @if($hasAssignmentNotes)
+                <div class="section">
+                    <div class="section-title">Special Notes from Our Team</div>
+                    <div style="background-color: #fff7ed; border: 1px solid #fe7f4c; padding: 15px; color: #6e7a7a; font-style: italic;">
+                        {{ $mentorshipRequest->assignment_notes }}
+                    </div>
+                </div>
+            @endif
 
             @if($hasBookingLink)
                 <div class="notification-section">
