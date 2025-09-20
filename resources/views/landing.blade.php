@@ -3,178 +3,239 @@
 @section('title', 'GeTu Mentorship Platform - Home')
 
 @section('content')
-    <!-- Hero - Split Screen -->
-    <section class="min-h-screen flex items-center">
-        <div class="w-full max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                <!-- Left Side - Text -->
-                <div class="py-20 lg:pr-16 flex flex-col justify-center">
-                    <div class="mb-6">
-                        <span class="text-[#fe7f4c] text-sm font-semibold tracking-wider uppercase">GeTu Prospects e.V.</span>
-                    </div>
-                    <h1 class="text-6xl lg:text-7xl font-bold text-[#1e3737] leading-tight mb-6">
-                        Mentorship<br/>
-                        that<br/>
-                        <span class="text-[#07847f]">matters.</span>
-                    </h1>
-                    <p class="text-xl text-[#6e7a7a] mb-10 leading-relaxed">
-                        Connect with experienced mentors who understand your journey in Germany.
-                    </p>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center">
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+             alt="People from different backgrounds coming together in community"
+             class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-r from-[#1e3737]/90 to-[#1e3737]/60"></div>
 
-                    <div class="flex gap-4">
-                        <a href="/request-mentorship" class="px-8 py-4 bg-[#07847f] text-white font-medium hover:bg-[#1e3737] transition-all">
-                            Get Started →
-                        </a>
-                        <a href="/mentor/apply" class="px-8 py-4 border-2 border-[#1e3737] text-[#1e3737] font-medium hover:bg-[#1e3737] hover:text-white transition-all">
-                            Become a Mentor
-                        </a>
-                    </div>
+        <div class="relative max-w-7xl mx-auto px-6 py-20">
+            <div class="max-w-2xl">
+                <div class="mb-6">
+                    <span class="text-[#8fe1de] text-sm font-semibold tracking-wider uppercase">GeTu Prospects e.V.</span>
                 </div>
-
-                <!-- Right Side - Visual -->
-                <div class="relative bg-gradient-to-br from-[#8fe1de] to-[#07847f] lg:min-h-[calc(100vh-4rem)] flex items-center justify-center">
-                    <div class="absolute inset-0 bg-[#1e3737]/10"></div>
-                    <div class="relative p-12 text-center">
-                        <div class="text-white">
-                            <div class="text-8xl font-bold mb-4">500+</div>
-                            <div class="text-2xl font-light">Successful Matches</div>
-                            <div class="mt-8 flex justify-center gap-8">
-                                <div>
-                                    <div class="text-4xl font-bold">92%</div>
-                                    <div class="text-sm opacity-90">Success Rate</div>
-                                </div>
-                                <div>
-                                    <div class="text-4xl font-bold">48h</div>
-                                    <div class="text-sm opacity-90">Avg. Match Time</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Simple Process -->
-    <section class="py-24 bg-[#f8f9fa]">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="max-w-2xl mb-16">
-                <h2 class="text-5xl font-bold text-[#1e3737] mb-4">
-                    How it works
-                </h2>
-                <p class="text-xl text-[#6e7a7a]">
-                    Three simple steps to connect with the right mentor
+                <h1 class="text-5xl lg:text-7xl font-bold text-white leading-tight mb-6">
+                    Your community in Germany<br/>
+                    <span class="text-[#8fe1de]">starts here.</span>
+                </h1>
+                <p class="text-xl text-white/90 mb-8 leading-relaxed">
+                    Connect with caring mentors who understand your journey. Get the support, friendship, and guidance you need to feel at home in Germany.
                 </p>
-            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-l border-[#e0e0e0]">
-                <div class="p-8 border-r border-b border-[#e0e0e0] bg-white hover:bg-[#f8f9fa] transition-colors">
-                    <div class="text-6xl font-bold text-[#8fe1de] mb-4">01</div>
-                    <h3 class="text-2xl font-semibold text-[#1e3737] mb-3">Apply</h3>
-                    <p class="text-[#6e7a7a]">Share your goals and what support you need</p>
-                </div>
-
-                <div class="p-8 border-r border-b border-[#e0e0e0] bg-white hover:bg-[#f8f9fa] transition-colors">
-                    <div class="text-6xl font-bold text-[#fe7f4c] mb-4">02</div>
-                    <h3 class="text-2xl font-semibold text-[#1e3737] mb-3">Match</h3>
-                    <p class="text-[#6e7a7a]">We connect you with the perfect mentor</p>
-                </div>
-
-                <div class="p-8 border-b border-r border-[#e0e0e0] bg-white hover:bg-[#f8f9fa] transition-colors">
-                    <div class="text-6xl font-bold text-[#07847f] mb-4">03</div>
-                    <h3 class="text-2xl font-semibold text-[#1e3737] mb-3">Grow</h3>
-                    <p class="text-[#6e7a7a]">Start your journey to success in Germany</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="{{ route('mentorship.request') }}" class="px-8 py-4 bg-[#fe7f4c] text-white font-semibold text-lg hover:bg-[#e6703f] transition-all text-center">
+                        Find a Mentor →
+                    </a>
+                    <a href="{{ route('mentor.apply') }}" class="px-8 py-4 border-2 border-white text-white font-semibold text-lg hover:bg-white hover:text-[#1e3737] transition-all text-center">
+                        Become a Mentor
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Expertise Grid - Bento Style -->
+    <!-- Why Choose Our Mentorship Program Section -->
     <section class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="mb-16">
-                <h2 class="text-5xl font-bold text-[#1e3737] mb-4">
-                    Expert guidance for every need
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl lg:text-5xl font-bold text-[#1e3737] mb-6">
+                        Why choose our mentorship program?
+                    </h2>
+                    <p class="text-xl text-[#6e7a7a] mb-6 leading-relaxed">
+                        Moving to a new country can feel overwhelming. Our mentorship program connects you with caring people who have walked the same path and want to help you succeed.
+                    </p>
+                    <p class="text-lg text-[#385656] mb-8 leading-relaxed">
+                        Our mentors are everyday people - neighbors, friends, community members - who remember what it was like to start fresh in Germany. They offer their time because they believe in the power of human connection and community support.
+                    </p>
+
+                    <div class="bg-[#f2f7f7] border-l-4 border-[#07847f] p-6">
+                        <h3 class="font-bold text-[#1e3737] mb-2">What makes us different:</h3>
+                        <ul class="space-y-2 text-[#385656]">
+                            <li class="flex items-start">
+                                <span class="text-[#07847f] mr-2">•</span>
+                                Genuine friendships built on mutual respect and care
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[#07847f] mr-2">•</span>
+                                Practical support from people who truly understand
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[#07847f] mr-2">•</span>
+                                A welcoming community that celebrates your journey
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[#07847f] mr-2">•</span>
+                                Emotional support during both challenges and victories
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+                         alt="Two women of different backgrounds having a warm, supportive conversation"
+                         class="w-full h-96 object-cover rounded-lg shadow-lg">
+                    <div class="absolute -bottom-6 -left-6 bg-[#fe7f4c] text-white p-6 rounded-lg">
+                        <div class="text-2xl font-bold">Free</div>
+                        <div class="text-sm">Always & Forever</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How Our Community Works -->
+    <section class="py-24 bg-[#f8f9fa]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold text-[#1e3737] mb-4">
+                    How our community works
                 </h2>
-                <p class="text-xl text-[#6e7a7a]">
-                    Our mentors cover all aspects of life in Germany
+                <p class="text-xl text-[#6e7a7a] max-w-3xl mx-auto">
+                    A simple, caring process designed to create lasting friendships and meaningful support
                 </p>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <!-- Large Card -->
-                <div class="col-span-2 row-span-2 bg-[#1e3737] p-10 text-white group hover:bg-[#07847f] transition-all">
-                    <h3 class="text-3xl font-bold mb-4">Career & Education</h3>
-                    <p class="text-lg opacity-90 mb-6">University applications, job search strategies, and professional development in the German market</p>
-                    <span class="text-white/60 group-hover:text-white transition">Learn more →</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Step 1 -->
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-[#fe7f4c] text-white text-2xl font-bold rounded-full flex items-center justify-center mb-6 mx-auto">1</div>
+                    <h3 class="text-lg font-bold text-[#1e3737] mb-2">Share your story</h3>
+                    <p class="text-sm text-[#6e7a7a]">Tell us about yourself, your dreams, and what kind of support would mean the most to you</p>
                 </div>
 
-                <!-- Regular Cards -->
-                <div class="bg-[#f8f9fa] p-6 hover:bg-[#8fe1de] hover:text-white transition-all group">
-                    <h4 class="text-lg font-semibold mb-2 group-hover:text-white">Housing</h4>
-                    <p class="text-sm text-[#6e7a7a] group-hover:text-white">Finding apartments</p>
+                <!-- Step 2 -->
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-[#07847f] text-white text-2xl font-bold rounded-full flex items-center justify-center mb-6 mx-auto">2</div>
+                    <h3 class="text-lg font-bold text-[#1e3737] mb-2">We connect hearts</h3>
+                    <p class="text-sm text-[#6e7a7a]">Our caring team thoughtfully matches you with someone who shares your interests and understands your journey</p>
                 </div>
 
-                <div class="bg-[#f8f9fa] p-6 hover:bg-[#fe7f4c] hover:text-white transition-all group">
-                    <h4 class="text-lg font-semibold mb-2 group-hover:text-white">Legal</h4>
-                    <p class="text-sm text-[#6e7a7a] group-hover:text-white">Visa & permits</p>
+                <!-- Step 3 -->
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-[#8fe1de] text-[#1e3737] text-2xl font-bold rounded-full flex items-center justify-center mb-6 mx-auto">3</div>
+                    <h3 class="text-lg font-bold text-[#1e3737] mb-2">Build friendship</h3>
+                    <p class="text-sm text-[#6e7a7a]">Meet your mentor and start building a meaningful relationship based on trust and mutual support</p>
                 </div>
 
-                <div class="bg-[#f8f9fa] p-6 hover:bg-[#07847f] hover:text-white transition-all group">
-                    <h4 class="text-lg font-semibold mb-2 group-hover:text-white">Language</h4>
-                    <p class="text-sm text-[#6e7a7a] group-hover:text-white">German practice</p>
-                </div>
-
-                <div class="bg-[#f8f9fa] p-6 hover:bg-[#1e3737] hover:text-white transition-all group">
-                    <h4 class="text-lg font-semibold mb-2 group-hover:text-white">Healthcare</h4>
-                    <p class="text-sm text-[#6e7a7a] group-hover:text-white">Insurance & doctors</p>
-                </div>
-
-                <!-- Wide Card -->
-                <div class="col-span-2 bg-[#fe7f4c] p-8 text-white">
-                    <h3 class="text-2xl font-bold mb-3">Family Integration</h3>
-                    <p class="opacity-90">Schools, childcare, and family services support</p>
+                <!-- Step 4 -->
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-[#1e3737] text-white text-2xl font-bold rounded-full flex items-center justify-center mb-6 mx-auto">4</div>
+                    <h3 class="text-lg font-bold text-[#1e3737] mb-2">Grow together</h3>
+                    <p class="text-sm text-[#6e7a7a]">Support each other through life's ups and downs, celebrate victories, and build lasting bonds</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonial -->
-    <section class="py-24 bg-[#f8f9fa]">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <div class="mb-8">
-                <svg class="w-16 h-16 text-[#8fe1de] mx-auto" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                </svg>
+    <!-- Areas of Support -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold text-[#1e3737] mb-4">
+                    How we support each other
+                </h2>
+                <p class="text-xl text-[#6e7a7a] max-w-3xl mx-auto">
+                    Our community helps with all aspects of life in Germany - from practical matters to emotional support
+                </p>
             </div>
-            <blockquote class="text-3xl font-light text-[#1e3737] mb-8 leading-relaxed">
-                The mentorship program helped me navigate the German job market with confidence. Within three months, I landed my dream position.
-            </blockquote>
-            <cite class="text-[#6e7a7a] not-italic">
-                <span class="font-semibold text-[#1e3737]">Maria Rodriguez</span>
-                <span class="mx-2">•</span>
-                Software Engineer, Berlin
-            </cite>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group bg-[#f8f9fa] p-8 hover:bg-[#1e3737] hover:text-white transition-all duration-300">
+                    <div class="w-16 h-16 bg-[#fe7f4c] rounded-lg flex items-center justify-center mb-4 group-hover:bg-[#8fe1de]">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Finding Your Path</h3>
+                    <p class="text-[#6e7a7a] group-hover:text-white/90">Whether it's career decisions, education choices, or life direction - get support from someone who cares about your dreams</p>
+                </div>
+
+                <div class="group bg-[#f8f9fa] p-8 hover:bg-[#07847f] hover:text-white transition-all duration-300">
+                    <div class="w-16 h-16 bg-[#07847f] rounded-lg flex items-center justify-center mb-4 group-hover:bg-[#8fe1de]">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Daily Life Support</h3>
+                    <p class="text-[#6e7a7a] group-hover:text-white/90">From finding a home to understanding healthcare, get practical help with the everyday challenges of life in Germany</p>
+                </div>
+
+                <div class="group bg-[#f8f9fa] p-8 hover:bg-[#fe7f4c] hover:text-white transition-all duration-300">
+                    <div class="w-16 h-16 bg-[#8fe1de] rounded-lg flex items-center justify-center mb-4 group-hover:bg-white">
+                        <svg class="w-8 h-8 text-[#1e3737] group-hover:text-[#fe7f4c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Building Community</h3>
+                    <p class="text-[#6e7a7a] group-hover:text-white/90">Connect with others, find your tribe, and build the social network that makes Germany feel like home</p>
+                </div>
+
+                <div class="group bg-[#f8f9fa] p-8 hover:bg-[#385656] hover:text-white transition-all duration-300">
+                    <div class="w-16 h-16 bg-[#385656] rounded-lg flex items-center justify-center mb-4 group-hover:bg-[#8fe1de]">
+                        <svg class="w-8 h-8 text-white group-hover:text-[#1e3737]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Language & Culture</h3>
+                    <p class="text-[#6e7a7a] group-hover:text-white/90">Practice German in a friendly environment and learn about German culture from someone who wants to see you succeed</p>
+                </div>
+
+                <div class="group bg-[#f8f9fa] p-8 hover:bg-[#6e7a7a] hover:text-white transition-all duration-300">
+                    <div class="w-16 h-16 bg-[#6e7a7a] rounded-lg flex items-center justify-center mb-4 group-hover:bg-[#8fe1de]">
+                        <svg class="w-8 h-8 text-white group-hover:text-[#1e3737]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Navigating Paperwork</h3>
+                    <p class="text-[#6e7a7a] group-hover:text-white/90">Get help understanding visa processes, permits, and all the official requirements with someone by your side</p>
+                </div>
+
+                <div class="group bg-[#f8f9fa] p-8 hover:bg-[#07847f] hover:text-white transition-all duration-300">
+                    <div class="w-16 h-16 bg-[#fe7f4c] rounded-lg flex items-center justify-center mb-4 group-hover:bg-[#8fe1de]">
+                        <svg class="w-8 h-8 text-white group-hover:text-[#1e3737]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Family Life</h3>
+                    <p class="text-[#6e7a7a] group-hover:text-white/90">Support for families navigating schools, childcare, and creating a loving home environment in Germany</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-32 bg-[#1e3737] relative overflow-hidden -mt-20">
-        <div class="absolute inset-0 bg-gradient-to-r from-[#1e3737] to-[#07847f] opacity-90"></div>
+    <!-- Join Our Community CTA Section -->
+    <section class="py-32 bg-[#1e3737] relative">
+        <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+             alt="Diverse community of people supporting each other"
+             class="absolute inset-0 w-full h-full object-cover opacity-20">
+
         <div class="relative max-w-4xl mx-auto text-center px-6">
             <h2 class="text-5xl md:text-6xl font-bold text-white mb-6">
-                Start your success story
+                Ready to join our community?
             </h2>
             <p class="text-2xl text-[#8fe1de] mb-12 font-light">
-                Join hundreds who've found their path in Germany
+                Take the first step towards building meaningful connections in Germany
             </p>
-            <div class="flex flex-col sm:flex-row gap-6 justify-center">
-                <a href="/request-mentorship" class="px-10 py-5 bg-white text-[#1e3737] font-semibold text-lg hover:bg-[#f8f9fa] transition-all">
-                    Request a Mentor
-                </a>
-                <a href="/mentor/apply" class="px-10 py-5 border-2 border-white text-white font-semibold text-lg hover:bg-white hover:text-[#1e3737] transition-all">
-                    Become a Mentor
-                </a>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+                <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg">
+                    <h3 class="text-2xl font-bold text-white mb-4">Looking for support?</h3>
+                    <p class="text-white/90 mb-6">Connect with a caring mentor who understands your journey and wants to help you thrive in Germany</p>
+                    <a href="{{ route('mentorship.request') }}" class="block w-full px-8 py-4 bg-[#fe7f4c] text-white font-semibold text-lg hover:bg-[#e6703f] transition-all">
+                        Find a Mentor
+                    </a>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg">
+                    <h3 class="text-2xl font-bold text-white mb-4">Want to help others?</h3>
+                    <p class="text-white/90 mb-6">Share your experience and make a meaningful difference in someone's life by becoming a mentor</p>
+                    <a href="{{ route('mentor.apply') }}" class="block w-full px-8 py-4 border-2 border-white text-white font-semibold text-lg hover:bg-white hover:text-[#1e3737] transition-all">
+                        Become a Mentor
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -189,7 +250,7 @@
                         GeTu Prospects e.V. is an intercultural non-profit organization based in Berlin, dedicated to supporting families and youth through integration and cultural exchange.
                     </p>
                     <p class="text-lg text-[#6e7a7a] mb-8 leading-relaxed">
-                        Our mentorship platform connects experienced individuals with newcomers, creating meaningful relationships that foster personal growth, professional development, and successful integration into German society.
+                        Our mentorship platform connects experienced individuals with newcomers, creating meaningful relationships that foster personal growth, emotional well-being, and successful integration into German society.
                     </p>
                     <div class="bg-[#f2f7f7] border-l-4 border-[#07847f] p-5 mb-8">
                         <p class="text-[#1e3737] font-semibold text-lg italic">

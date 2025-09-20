@@ -48,7 +48,6 @@
             margin-bottom: 25px;
         }
         .success-box {
-            background-color: #8fe1de;
             border-left: 4px solid #07847f;
             padding: 20px;
             margin: 30px 0;
@@ -200,115 +199,63 @@
                 Great news! We've found a perfect match for your mentoring expertise. A young person is looking for guidance in your area of specialization, and we believe you can make a real difference in their journey.
             </div>
 
-            <div class="success-box">
-                <h2>New Mentee Match</h2>
-                <p>Based on your expertise and availability, we've matched you with a mentee who needs guidance in areas where you excel. This is an opportunity to share your knowledge and help shape someone's future.</p>
+            <div class="message">
+                <strong style="color: #1e3737; font-size: 20px; font-weight: 600;">Your Mentee: {{ $mentorshipRequest->mentee_name }}</strong>
             </div>
 
-            <div class="mentee-card">
-                <div class="mentee-name">{{ $mentorshipRequest->mentee_name }}</div>
-                <div class="mentee-info"><strong>Email:</strong> {{ $mentorshipRequest->mentee_email }}</div>
+            <div class="message">
+                Based on your expertise and availability, we've matched you with a mentee who needs guidance in areas where you excel. This is an opportunity to share your knowledge and help shape someone's future.
+
+                <br><br><strong>Email:</strong> {{ $mentorshipRequest->mentee_email }}
                 @if($mentorshipRequest->mentee_phone)
-                    <div class="mentee-info"><strong>Phone:</strong> {{ $mentorshipRequest->mentee_phone }}</div>
+                    <br><strong>Phone:</strong> {{ $mentorshipRequest->mentee_phone }}
                 @endif
-                <div class="mentee-info"><strong>Request Date:</strong> {{ $mentorshipRequest->created_at->format('F j, Y') }}</div>
+                <br><strong>Request Date:</strong> {{ $mentorshipRequest->created_at->format('F j, Y') }}
             </div>
 
-            <div class="request-section">
-                <h3>What They're Looking For</h3>
-                <div class="help-description">
-                    {{ $mentorshipRequest->help_description }}
-                </div>
+            <div class="message">
+                <strong>What they're looking for help with:</strong><br>
+                <em style="color: #6e7a7a;">"{{ $mentorshipRequest->help_description }}"</em>
 
                 @if(count($requestedExpertise) > 0)
-                    <p><strong>Requested Areas of Expertise:</strong></p>
-                    <div class="expertise-list">
-                        @foreach($requestedExpertise as $area)
-                            <span class="expertise-item">{{ $area }}</span>
-                        @endforeach
-                    </div>
+                    <br><br><strong>Requested expertise areas:</strong>
+                    @foreach($requestedExpertise as $area)@if(!$loop->first), @endif{{ $area }}@endforeach
                 @endif
             </div>
 
             @if($hasAssignmentNotes)
-                <div class="section">
-                    <div class="section-title">Special Notes from Our Team</div>
-                    <div style="background-color: #fff7ed; border: 1px solid #fe7f4c; padding: 15px; color: #6e7a7a; font-style: italic;">
-                        {{ $mentorshipRequest->assignment_notes }}
-                    </div>
+                <div class="message">
+                    <strong>Special notes from our team:</strong><br>
+                    <em style="color: #6e7a7a;">"{{ $mentorshipRequest->assignment_notes }}"</em>
                 </div>
             @endif
 
-            @if($hasBookingLink)
-                <div class="notification-section">
-                    <h3>What We've Sent to Your Mentee</h3>
-                    <p>We've sent {{ $mentorshipRequest->mentee_name }} an email with <span class="highlight">your booking calendar link</span> so they can schedule a session directly with you.</p>
-
-                    <p><strong>Your booking link:</strong><br>
-                    <a href="{{ $mentor->booking_calendar_link }}" target="_blank">{{ $mentor->booking_calendar_link }}</a></p>
-
-                    <p>They should be able to book a convenient time slot from your available times. You'll receive notifications through your calendar system when they book a session.</p>
-                </div>
-            @else
-                <div class="notification-section">
-                    <h3>What We've Sent to Your Mentee</h3>
-                    <p>Since you don't have a booking calendar link set up, we've sent {{ $mentorshipRequest->mentee_name }} <span class="highlight">your contact information</span> and instructions to reach out to you directly.</p>
-
-                    <p><strong>Contact details shared:</strong></p>
-                    <ul>
-                        <li>Email: {{ $mentor->email }}</li>
-                        @if($mentor->phone)
-                            <li>Phone: {{ $mentor->phone }}</li>
+            <div class="section">
+                <div class="section-title">Next Steps</div>
+                <ul>
+                    <li><strong>1. {{ $hasBookingLink ? 'Monitor your calendar' : 'Watch for their message' }}:</strong>
+                        @if($hasBookingLink)
+                            Your mentee will book directly through your calendar system using this link: <a href="{{ $mentor->booking_calendar_link }}" target="_blank">{{ $mentor->booking_calendar_link }}</a>
+                            <br><small style="color: #8b9e9e;">Calendar link: {{ $mentor->booking_calendar_link }}</small>
+                        @else
+                            Expect to hear from your mentee within the next few days. We've shared your contact information ({{ $mentor->email }}@if($mentor->phone), {{ $mentor->phone }}@endif) with them.
                         @endif
-                    </ul>
-
-                    <p>They've been instructed to introduce themselves, mention they were matched through GeTu, and propose some time slots that work for them.</p>
-                </div>
-            @endif
-
-            <div class="section">
-                <div class="section-title">Next Steps for You</div>
-                <ul>
-                    <li><strong>{{ $hasBookingLink ? 'Monitor your calendar' : 'Watch for their message' }}:</strong> {{ $hasBookingLink ? 'Your mentee will book directly through your calendar system.' : 'Expect to hear from your mentee within the next few days.' }}</li>
-                    <li><strong>Prepare for your first session:</strong> Review their request and think about how you can best help them achieve their goals.</li>
-                    <li><strong>Be welcoming:</strong> Remember that reaching out for mentorship takes courage. Make them feel comfortable and supported.</li>
-                    <li><strong>Set expectations:</strong> Discuss how often you'll meet, communication preferences, and what success looks like.</li>
-                    <li><strong>Share your experience:</strong> Your insights and journey can provide valuable perspective and inspiration.</li>
+                    </li>
+                    <li><strong>2. Prepare for your first session:</strong> Review their request and think about how you can best help them achieve their goals.</li>
+                    <li><strong>3. Be welcoming and set expectations:</strong> Make them feel comfortable and discuss how often you'll meet and what success looks like.</li>
+                    @if($reportUrl)
+                        <li><strong>4. After your session:</strong> <a href="{{ $reportUrl }}" style="color: #07847f; text-decoration: underline;">Submit a brief report</a> to help us track program impact.
+                            <br><small style="color: #8b9e9e;">Report link: {{ $reportUrl }}</small>
+                        </li>
+                    @endif
                 </ul>
+
+                <p style="margin-top: 20px; font-size: 14px; color: #6e7a7a;">
+                    <strong>Need support?</strong> Contact us at <a href="mailto:admin@getu-prospects.de" style="color: #07847f;">admin@getu-prospects.de</a><br>
+                    <small style="color: #8b9e9e;">Email: admin@getu-prospects.de</small>
+                </p>
             </div>
 
-            <div class="section">
-                <div class="section-title">Making Your Mentorship Impactful</div>
-                <ul>
-                    <li><strong>Listen actively:</strong> Understand their challenges, goals, and what they hope to achieve.</li>
-                    <li><strong>Ask thoughtful questions:</strong> Help them think through problems and discover solutions themselves.</li>
-                    <li><strong>Share practical advice:</strong> Offer concrete steps and resources they can use.</li>
-                    <li><strong>Be patient and encouraging:</strong> Growth takes time, and your support makes all the difference.</li>
-                    <li><strong>Follow up:</strong> Check in on their progress and celebrate their achievements.</li>
-                </ul>
-            </div>
-
-            @if($reportUrl)
-                <div class="section">
-                    <div class="section-title">After Your Session</div>
-                    <p>After you've completed your mentorship session, please provide us with a brief report using the link below. This helps us track the impact and success of our program:</p>
-
-                    <div style="text-align: center; margin: 20px 0;">
-                        <a href="{{ $reportUrl }}" style="display: inline-block; background-color: #07847f; color: #ffffff; padding: 12px 24px; text-decoration: none; font-weight: 600; border-radius: 6px;">
-                            Submit Session Report
-                        </a>
-                    </div>
-
-                    <p style="font-size: 14px; color: #8b9e9e;"><strong>Important:</strong> This report link will expire in 7 days and can only be used once. Please save this email until after your session.</p>
-                </div>
-            @endif
-
-            <div class="divider"></div>
-
-            <div class="note-box">
-                <strong>Need support or have questions?</strong><br>
-                If you need any assistance with your mentorship or have questions about this match, please contact us at <a href="mailto:admin@getu-prospects.de">admin@getu-prospects.de</a>. We're here to support you in making this mentorship successful.
-            </div>
 
             <div class="message">
                 Thank you for being part of the GeTu Mentorship Program. Your willingness to share your knowledge and guide others is making a real difference in helping young people build their futures in Germany.
@@ -328,7 +275,7 @@
             <p><strong>GeTu Prospects e.V.</strong></p>
             <p>Supporting refugee and migrant youth in Germany</p>
             <p>
-                <a href="https://www.getu-prospects.de">www.getu-prospects.de</a> |
+                <a href="https://getu-prospects.de">GeTu Prospects e.V.</a> |
                 <a href="mailto:admin@getu-prospects.de">admin@getu-prospects.de</a>
             </p>
             <p style="margin-top: 20px; font-size: 12px; color: #b0b0b0;">

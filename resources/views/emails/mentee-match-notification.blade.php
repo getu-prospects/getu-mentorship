@@ -48,7 +48,6 @@
             margin-bottom: 25px;
         }
         .success-box {
-            background-color: #8fe1de;
             border-left: 4px solid #07847f;
             padding: 20px;
             margin: 30px 0;
@@ -97,6 +96,7 @@
             text-decoration: none;
             font-weight: 600;
             margin: 15px 0;
+            border-radius: 6px;
         }
         .booking-link:hover {
             background-color: #e06838;
@@ -205,27 +205,20 @@
                 We're excited to inform you that we've found a mentor who can help you with your request. Your journey toward achieving your goals is about to begin!
             </div>
 
-            <div class="success-box">
-                <h2>Mentor Match Found</h2>
-                <p>Based on your needs and preferences, we've carefully matched you with an experienced mentor who specializes in the areas where you're seeking guidance.</p>
+            <div class="message">
+                <strong style="color: #1e3737; font-size: 20px; font-weight: 600;">Your Mentor: {{ $mentor->name }}</strong>
             </div>
 
-            <div class="mentor-card">
-                <div class="mentor-name">{{ $mentor->name }}</div>
+            <div class="message">
+                Based on your needs and preferences, we've carefully matched you with an experienced mentor who specializes in the areas where you're seeking guidance.
+
                 @if($mentor->profession)
-                    <div class="mentor-info"><strong>Profession:</strong> {{ $mentor->profession }}</div>
-                @endif
-                @if($mentor->location)
-                    <div class="mentor-info"><strong>Location:</strong> {{ $mentor->location }}</div>
+                    <br><br><strong>Profession:</strong> {{ $mentor->profession }}
                 @endif
 
                 @if(count($expertiseAreas) > 0)
-                    <div class="section-title" style="margin-top: 20px;">Areas of Expertise</div>
-                    <div class="expertise-list">
-                        @foreach($expertiseAreas as $area)
-                            <span class="expertise-item">{{ $area }}</span>
-                        @endforeach
-                    </div>
+                    <br><br><strong>Areas of Expertise:</strong>
+                    @foreach($expertiseAreas as $area)@if(!$loop->first), @endif{{ $area }}@endforeach
                 @endif
             </div>
 
@@ -237,6 +230,10 @@
                         Book Your Mentorship Session
                     </a>
                     <p><small>You'll be redirected to your mentor's calendar where you can select an available time slot.</small></p>
+                    <p style="font-size: 12px; color: #8b9e9e; margin-top: 15px;">
+                        <strong>Link not working?</strong> Copy and paste this URL into your browser:<br>
+                        {{ $mentor->booking_calendar_link }}
+                    </p>
                 </div>
             @else
                 <div class="contact-section">
@@ -261,42 +258,22 @@
             @endif
 
             <div class="section">
-                <div class="section-title">Your Original Request</div>
-                <p><strong>What you're looking for help with:</strong></p>
-                <p style="font-style: italic; color: #6e7a7a;">{{ $mentorshipRequest->help_description }}</p>
-            </div>
-
-            <div class="section">
-                <div class="section-title">Making the Most of Your Mentorship</div>
+                <div class="section-title">Next Steps</div>
                 <ul>
-                    <li><strong>Come prepared:</strong> Think about specific questions or challenges you'd like to discuss.</li>
-                    <li><strong>Be open:</strong> Share your goals, concerns, and what success looks like to you.</li>
-                    <li><strong>Take notes:</strong> Keep track of advice and action items from your sessions.</li>
-                    <li><strong>Follow up:</strong> Implement suggestions and update your mentor on your progress.</li>
-                    <li><strong>Be respectful:</strong> Honor scheduled times and give advance notice if you need to reschedule.</li>
+                    <li><strong>1. Contact your mentor:</strong> {{ $hasBookingLink ? 'Use the booking link above to schedule your first session.' : 'Send them an email to introduce yourself and arrange your first meeting.' }}</li>
+                    <li><strong>2. Prepare for your session:</strong> Think about 2-3 specific questions or challenges you'd like help with.</li>
+                    <li><strong>3. Be ready to share:</strong> Your goals and what success looks like to you.</li>
+                    @if($feedbackUrl)
+                        <li><strong>4. After your session:</strong> <a href="{{ $feedbackUrl }}" style="color: #fe7f4c; text-decoration: underline;">Provide feedback</a> to help us improve our program.
+                            <br><small style="color: #8b9e9e;">Feedback link: {{ $feedbackUrl }}</small>
+                        </li>
+                    @endif
                 </ul>
-            </div>
 
-            @if($feedbackUrl)
-                <div class="section">
-                    <div class="section-title">After Your Session</div>
-                    <p>After you've completed your mentorship session, we'd love to hear about your experience. Please use the link below to provide feedback:</p>
-
-                    <div style="text-align: center; margin: 20px 0;">
-                        <a href="{{ $feedbackUrl }}" style="display: inline-block; background-color: #fe7f4c; color: #ffffff; padding: 12px 24px; text-decoration: none; font-weight: 600; border-radius: 6px;">
-                            Provide Session Feedback
-                        </a>
-                    </div>
-
-                    <p style="font-size: 14px; color: #8b9e9e;"><strong>Important:</strong> This feedback link will expire in 7 days and can only be used once. Please save this email until after your session.</p>
-                </div>
-            @endif
-
-            <div class="divider"></div>
-
-            <div class="note-box">
-                <strong>Need support?</strong><br>
-                If you have any questions about your match or encounter any issues, please don't hesitate to contact us at <a href="mailto:admin@getu-prospects.de">admin@getu-prospects.de</a>.
+                <p style="margin-top: 20px; font-size: 14px; color: #6e7a7a;">
+                    <strong>Need support?</strong> Contact us at <a href="mailto:admin@getu-prospects.de" style="color: #07847f;">admin@getu-prospects.de</a><br>
+                    <small style="color: #8b9e9e;">Email: admin@getu-prospects.de</small>
+                </p>
             </div>
 
             <div class="message">
@@ -317,7 +294,7 @@
             <p><strong>GeTu Prospects e.V.</strong></p>
             <p>Supporting refugee and migrant youth in Germany</p>
             <p>
-                <a href="https://www.getu-prospects.de">www.getu-prospects.de</a> |
+                <a href="https://getu-prospects.de">GeTu Prospects</a> |
                 <a href="mailto:admin@getu-prospects.de">admin@getu-prospects.de</a>
             </p>
             <p style="margin-top: 20px; font-size: 12px; color: #b0b0b0;">

@@ -32,8 +32,8 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-gray-300">
                     <!-- Left Side - Program Info -->
                     <div class="bg-white relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1528901166007-3784c7dd3653?q=80&w=2070&auto=format&fit=crop"
-                             alt="Mentorship session"
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3"
+                             alt="People collaborating and mentoring in modern office"
                              class="w-full h-64 object-cover">
                         <div class="p-8">
                             <h2 class="text-2xl font-bold text-[#1e3737] mb-4">Our Mentorship Program</h2>
