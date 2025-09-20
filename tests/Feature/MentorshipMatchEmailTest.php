@@ -203,8 +203,8 @@ class MentorshipMatchEmailTest extends TestCase
             $envelope = $mail->envelope();
 
             return $envelope->subject === "Great News! You've Been Matched with a Mentor" &&
-                   $envelope->from->address === 'noreply@getu-prospects.de' &&
-                   $envelope->from->name === 'GeTu Prospects e.V.';
+                   $envelope->from->address === config('mail.from.address') &&
+                   $envelope->from->name === config('mail.from.name');
         });
     }
 
@@ -229,8 +229,8 @@ class MentorshipMatchEmailTest extends TestCase
             $envelope = $mail->envelope();
 
             return $envelope->subject === "You've Been Matched with a Mentee!" &&
-                   $envelope->from->address === 'noreply@getu-prospects.de' &&
-                   $envelope->from->name === 'GeTu Prospects e.V.';
+                   $envelope->from->address === config('mail.from.address') &&
+                   $envelope->from->name === config('mail.from.name');
         });
     }
 }

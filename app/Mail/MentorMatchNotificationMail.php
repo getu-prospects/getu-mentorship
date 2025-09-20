@@ -30,6 +30,7 @@ class MentorMatchNotificationMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
+            from: new \Illuminate\Mail\Mailables\Address(config('mail.from.address'), config('mail.from.name')),
             subject: 'You\'ve Been Matched with a Mentee!',
         );
     }

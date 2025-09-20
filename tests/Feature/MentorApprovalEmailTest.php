@@ -66,8 +66,8 @@ test('approval email has correct subject and from address', function () {
     $envelope = $mail->envelope();
 
     expect($envelope->subject)->toBe('Welcome to GeTu Mentorship Program!');
-    expect($envelope->from->address)->toBe('noreply@getu-prospects.de');
-    expect($envelope->from->name)->toBe('GeTu Prospects e.V.');
+    expect($envelope->from->address)->toBe(config('mail.from.address'));
+    expect($envelope->from->name)->toBe(config('mail.from.name'));
 });
 
 test('approving mentor through admin interface sends email', function () {
